@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather App</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:url('https://images.unsplash.com/photo-1506744038136-46273834b3fb')
+    no-repeat center center/cover;
+    transition:0.5s;
+}
+
+.container{
+    width:350px;
+    padding:25px;
+    text-align:center;
+    border-radius:20px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    color:white;
+    box-shadow:0 8px 32px rgba(0,0,0,0.3);
+}
+
+h1{
+    margin-bottom:15px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    margin-bottom:10px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#00bfff;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#009acd;
+}
+
+#weatherResult{
+    margin-top:20px;
+    font-size:18px;
+    line-height:1.8;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🌦 Weather App</h1>
+
+    <input type="text" id="city" placeholder="Enter City Name">
+
+    <button onclick="getWeather()">Search Weather</button>
+
+    <div id="weatherResult"></div>
+</div>
+
+<script>
+async function getWeather(){
+
+    const city = document.getElementById("city").value;
+
+    const apiKey = "1f59ff91d73e1d30a60311a82f25f9eb";
+
+    const url =
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+    try{
+
+        const response = await fetch(url);
+
+        if(!response.ok){
+            throw new Error("City not found");
+        }
+
+        const data = await response.json();
+
+        document.getElementById("weatherResult").innerHTML = `
+            <h2>${data.name}</h2>
+            <p>🌡 Temperature: ${data.main.temp} °C</p>
+            <p>☁ Weather: ${data.weather[0].main}</p>
+            <p>💧 Humidity: ${data.main.humidity}%</p>
+            <p>🌬 Wind: ${data.wind.speed} km/h</p>
+        `;
+
+        const weather = data.weather[0].main;
+
+        if(weather === "Clear"){
+            document.body.style.background =
+            "url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') center/cover";
+        }
+        else if(weather === "Clouds"){
+            document.body.style.background =
+            "url('https://images.unsplash.com/photo-1534088568595-a066f410bcda') center/cover";
+        }
+        else if(weather === "Rain"){
+            document.body.style.background =
+            "url('https://images.unsplash.com/photo-1515694346937-94d85e41e6f0') center/cover";
+        }
+
+    }
+    catch(error){
+        document.getElementById("weatherResult").innerHTML =
+        "<p style='color:yellow;'>❌ City Not Found</p>";
+    }
+}
+</script>
+
+</body>
+</html>
