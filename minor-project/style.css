@@ -1,0 +1,120 @@
+ *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:url("https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80");
+    background-size:cover;
+    background-position:center;
+}
+
+.container{
+    width:850px;
+}
+
+.expense-card{
+    background:linear-gradient(to bottom,#2196f3,#0d47a1);
+    color:white;
+    text-align:center;
+    padding:30px;
+    border-radius:35px 35px 0 0;
+}
+
+.expense-card h1{
+    font-size:45px;
+}
+
+.report-card{
+    background:white;
+    text-align:center;
+    padding:15px;
+    font-size:20px;
+    border-radius:0 0 35px 35px;
+    margin-bottom:25px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+.categories{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+
+.cat{
+    width:250px;
+    background:white;
+    padding:20px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+
+.cat h3{
+    color:#0d47a1;
+    margin-bottom:10px;
+}
+
+.section,
+.Section{
+    background:white;
+    padding:25px;
+    margin-top:20px;
+    border-radius:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+
+.section h2,
+.Section h2{
+    color:#0d47a1;
+    margin-bottom:15px;
+}
+
+.Category{
+    display:flex;
+    justify-content:space-between;
+    background:#f1f5f9;
+    padding:15px;
+    margin:10px 0;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+.Transactions{
+    background:#f1f5f9;
+    padding:15px;
+    margin:10px 0;
+    border-radius:12px;
+}
+
+.Transactions h4{
+    color:#0d47a1;
+    margin-bottom:5px;
+}
+
+.add-btn{
+    width:90px;
+    height:90px;
+    background:#0d47a1;
+    color:white;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:50px;
+    margin:25px auto;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+.Section p:last-child{
+    text-align:center;
+    font-weight:bold;
+    color:#0d47a1;
+}
