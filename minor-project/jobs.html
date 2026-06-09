@@ -1,0 +1,220 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickHire - Job Portal</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:
+    linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+    url("https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=80");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    min-height:100vh;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:20px;
+}
+
+.page{
+    display:none;
+}
+
+.active{
+    display:block;
+}
+
+h1,h2{
+    text-align:center;
+    color:white;
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    background:#ff9800;
+    color:white;
+    cursor:pointer;
+    margin:5px;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#e68900;
+}
+
+.job-card{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    margin:15px 0;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+.job-card h3{
+    color:#333;
+}
+
+.job-card p{
+    margin:8px 0;
+}
+
+#successMsg{
+    text-align:center;
+    color:lime;
+    font-size:22px;
+    margin-top:20px;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- Home Page -->
+<div id="home" class="page active">
+    <h1>Find Your Dream Job Today</h1>
+
+    <input type="text" id="searchBox" placeholder="Search Job Title">
+
+    <center>
+        <button onclick="showJobs()">Browse All Jobs</button>
+    </center>
+</div>
+
+<!-- Job List -->
+<div id="jobs" class="page">
+    <h2>Available Jobs</h2>
+
+    <center>
+        <button onclick="filterJobs('All')">All</button>
+        <button onclick="filterJobs('Remote')">Remote</button>
+        <button onclick="filterJobs('Full-Time')">Full-Time</button>
+    </center>
+
+    <div id="jobList"></div>
+</div>
+
+<!-- Job Details -->
+<div id="details" class="page">
+    <h2>Job Details</h2>
+
+    <div class="job-card">
+        <h3 id="jobTitle"></h3>
+        <p id="company"></p>
+        <p id="salary"></p>
+        <p id="description"></p>
+
+        <button onclick="applyNow()">Apply Now</button>
+    </div>
+
+    <p id="successMsg"></p>
+</div>
+
+</div>
+
+<script>
+
+const jobs = [
+{
+title:"Frontend Developer",
+company:"TechSoft",
+salary:"₹40,000",
+type:"Remote",
+description:"Build responsive websites using HTML, CSS and JavaScript."
+},
+{
+title:"UI Designer",
+company:"Creative Studio",
+salary:"₹35,000",
+type:"Full-Time",
+description:"Design user-friendly UI and graphics."
+},
+{
+title:"React Developer",
+company:"CodeHub",
+salary:"₹50,000",
+type:"Remote",
+description:"Develop modern web apps using React JS."
+}
+];
+
+function showJobs(){
+document.getElementById("home").classList.remove("active");
+document.getElementById("jobs").classList.add("active");
+displayJobs(jobs);
+}
+
+function displayJobs(jobArray){
+let output="";
+
+jobArray.forEach(job=>{
+output += `
+<div class="job-card">
+<h3>${job.title}</h3>
+<p><b>Company:</b> ${job.company}</p>
+<p><b>Salary:</b> ${job.salary}</p>
+<p><b>Type:</b> ${job.type}</p>
+
+<button onclick="showDetails('${job.title}','${job.company}','${job.salary}','${job.description}')">
+View Details
+</button>
+</div>
+`;
+});
+
+document.getElementById("jobList").innerHTML=output;
+}
+
+function filterJobs(type){
+if(type==="All"){
+displayJobs(jobs);
+}else{
+displayJobs(jobs.filter(job=>job.type===type));
+}
+}
+
+function showDetails(title,company,salary,description){
+
+document.getElementById("jobs").classList.remove("active");
+document.getElementById("details").classList.add("active");
+
+document.getElementById("jobTitle").innerText=title;
+document.getElementById("company").innerText="Company: " + company;
+document.getElementById("salary").innerText="Salary: " + salary;
+document.getElementById("description").innerText=description;
+}
+
+function applyNow(){
+document.getElementById("successMsg").innerHTML =
+"✅ Success! Your application has been submitted.";
+}
+
+</script>
+
+</body>
+</html>
