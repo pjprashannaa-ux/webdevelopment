@@ -1,0 +1,135 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fruit Finder</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+ body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:url("https://images.unsplash.com/photo-1619566636858-adf3ef46400b") center/cover no-repeat;
+}
+
+
+.container{
+    width:420px;
+    background:rgba(255,255,255,0.95);
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+h2{
+    text-align:center;
+    color:#333;
+    margin-bottom:20px;
+}
+
+#searchBox{
+    width:100%;
+    padding:12px;
+    border:2px solid #667eea;
+    border-radius:10px;
+    font-size:16px;
+    outline:none;
+    margin-bottom:20px;
+}
+
+#searchBox:focus{
+    border-color:#764ba2;
+}
+
+ul{
+    list-style:none;
+}
+
+li{
+    background:#f5f5f5;
+    padding:12px;
+    margin:8px 0;
+    border-radius:10px;
+    transition:0.3s;
+    cursor:pointer;
+}
+
+li:hover{
+    background:#667eea;
+    color:white;
+    transform:translateX(5px);
+}
+
+#noResult{
+    display:none;
+    text-align:center;
+    color:red;
+    margin-top:10px;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🍎 Fruit Finder</h2>
+
+    <input type="text" id="searchBox" placeholder="Search Fruits...">
+
+    <ul id="fruitList">
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Orange</li>
+        <li>Mango</li>
+        <li>Grapes</li>
+        <li>Pineapple</li>
+        <li>Watermelon</li>
+        <li>Strawberry</li>
+        <li>Kiwi</li>
+        <li>Papaya</li>
+    </ul>
+
+    <p id="noResult">❌ No Results Found</p>
+</div>
+
+<script>
+const searchBox = document.getElementById("searchBox");
+const fruits = document.querySelectorAll("#fruitList li");
+const noResult = document.getElementById("noResult");
+
+searchBox.addEventListener("keyup", function(){
+
+    let searchValue = searchBox.value.toLowerCase();
+    let count = 0;
+
+    fruits.forEach(function(fruit){
+
+        let text = fruit.textContent.toLowerCase();
+
+        if(text.includes(searchValue)){
+            fruit.style.display = "block";
+            count++;
+        }else{
+            fruit.style.display = "none";
+        }
+    });
+
+    if(count === 0){
+        noResult.style.display = "block";
+    }else{
+        noResult.style.display = "none";
+    }
+});
+</script>
+
+</body>
+</html>
